@@ -8,49 +8,57 @@ const Signup = () => {
     const [fuleName, setFuleName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [errors, setError] = useState([]);
+    const [errors, setError] = useState({});
 
 
     const dispatch = useDispatch()
-    async function Signup (e) {
+    async function Signup(e) {
         e.preventDefault();
-        let obj = {email, fuleName, username, password};
+        let obj = { email, fuleName, username, password };
         const data = await dispatch(signup(obj));
 
-        setError( data);
+        setError(data);
     }
-    console.log(errors);
 
 
-  return (
-    <div>
-        <form>
-            <input type="text" placeholder='email' value = {email} onChange={(e) => {
-                setEmail(e.target.value)
-            }} />
-            <input type="text" placeholder='fule name' value = {fuleName} onChange={(e) => {
-                setFuleName(e.target.value)
-            }}/>
-            <input type="text" placeholder='username' value = {username} onChange={(e) => {
-                setUsername(e.target.value)
-            }}/>
-            <input type="text" placeholder='password' value = {password} onChange={(e) => {
-                setPassword(e.target.value)
-            }}/>
+    return (
+        <div>
+            <form>
+                <input type="text" placeholder='email' value={email} onChange={(e) => {
+                    setEmail(e.target.value)
+                }} />
+                <input type="text" placeholder='fule name' value={fuleName} onChange={(e) => {
+                    setFuleName(e.target.value)
+                }} />
+                <input type="text" placeholder='username' value={username} onChange={(e) => {
+                    setUsername(e.target.value)
+                }} />
+                <input type="text" placeholder='password' value={password} onChange={(e) => {
+                    setPassword(e.target.value)
+                }} />
 
-           
-            <button onClick={Signup}>Signup</button>
 
-            <ul>
-                <li>{errors.email && errors.email[0]}</li>
-                <li>{errors.fuleName && errors.fuleName[0]}</li>
-                <li>{errors.username && errors.username[0]}</li>
-                <li>{errors.password && errors.password[0]}</li>
+                <button onClick={Signup}>Signup</button>
 
-            </ul>
-        </form>
-    </div>
-  )
+                {Object.keys(errors).length >= 1 ?(
+                    <>
+                        <div style={{ color: "red" }}>
+                            <p>{errors.email && errors.email[0]}</p>
+                            <p>{errors.fuleName && errors.fuleName[0]}</p>
+                            <p>{errors.username && errors.username[0]}</p>
+                            <p>{errors.password && errors.password[0]}</p>
+                            <p>{errors.user && errors.user[0]}</p>
+                        </div>
+                    </>
+            ):(
+                <>
+                </>
+            )}
+
+
+            </form>
+        </div>
+    )
 }
 
 export default Signup
