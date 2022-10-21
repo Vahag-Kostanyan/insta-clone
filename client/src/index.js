@@ -7,6 +7,9 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from "redux-thunk";
 import response from "./respons"
 import axios from "axios";
+import { useDispatch } from "react-redux";
+
+
 
 const store = createStore(response, compose(applyMiddleware(thunk)))
 
